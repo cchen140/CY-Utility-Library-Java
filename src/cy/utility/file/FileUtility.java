@@ -1,7 +1,20 @@
-package cy.utility;
+package cy.utility.file;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+/*
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.5</version>
+</dependency>
+*/
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.comparator.LastModifiedFileComparator;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 /**
  * Created by cychen on 7/26/16.
@@ -48,5 +61,24 @@ public class FileUtility {
             outFolderNames.add(thisFolder.getName());
         }
         return outFolderNames;
+    }
+
+
+    /* Get the newest file for a specific extension
+     * https://stackoverflow.com/questions/285955/java-get-the-newest-file-in-a-directory
+     */
+    public static File getTheNewestFile(String filePath, String ext) {
+        File theNewestFile = null;
+        File dir = new File(filePath);
+        FileFilter fileFilter = new WildcardFileFilter("*." + ext);
+        File[] files = dir.listFiles();// (fileFilter);
+
+        if (files.length > 0) {
+            /** The newest file comes first **/
+            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+            theNewestFile = files[0];
+        }
+
+        return theNewestFile;
     }
 }
