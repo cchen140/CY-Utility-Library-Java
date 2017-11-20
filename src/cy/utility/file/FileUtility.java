@@ -71,14 +71,15 @@ public class FileUtility {
         File theNewestFile = null;
         File dir = new File(filePath);
         FileFilter fileFilter = new WildcardFileFilter("*." + ext);
-        File[] files = dir.listFiles();// (fileFilter);
+        File[] files = dir.listFiles(File::isFile);// (fileFilter);
 
-        if (files.length > 0) {
-            /** The newest file comes first **/
-            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-            theNewestFile = files[0];
-        }
+//        if (files.length > 0) {
+//            /** The newest file comes first **/
+//            Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+//            theNewestFile = files[0];
+//        }
 
-        return theNewestFile;
+        //return theNewestFile;
+        return files[files.length-1];
     }
 }

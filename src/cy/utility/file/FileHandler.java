@@ -87,7 +87,7 @@ public class FileHandler {
      * @param filePath The path of a selected log file to be opened.
      * @return a BufferedReader of the opened file.
      */
-    protected BufferedReader openFile(String filePath)
+    public BufferedReader openFile(String filePath)
     {
         try {
             BufferedReader fileReader = new BufferedReader(new FileReader(filePath));
@@ -106,7 +106,7 @@ public class FileHandler {
      * @param filePath The path of a selected log file to be opened/created and written.
      * @return a BufferedWriter of the opened file.
      */
-    protected BufferedWriter openToWriteFile(String filePath)
+    public BufferedWriter openToWriteFile(String filePath)
     {
         try {
             BufferedWriter fileWriter = new BufferedWriter(new FileWriter(filePath));
