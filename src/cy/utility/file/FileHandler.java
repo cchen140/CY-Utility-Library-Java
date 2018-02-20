@@ -90,7 +90,7 @@ public class FileHandler {
     public BufferedReader openFile(String filePath)
     {
         try {
-            BufferedReader fileReader = new BufferedReader(new FileReader(filePath));
+            fileReader = new BufferedReader(new FileReader(filePath));
             return fileReader;
         }
         catch (IOException x)
