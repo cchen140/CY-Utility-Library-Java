@@ -109,7 +109,7 @@ public class FileHandler {
     public BufferedWriter openToWriteFile(String filePath)
     {
         try {
-            BufferedWriter fileWriter = new BufferedWriter(new FileWriter(filePath));
+            fileWriter = new BufferedWriter(new FileWriter(filePath));
             return fileWriter;
         }
         catch (IOException x)
@@ -120,8 +120,26 @@ public class FileHandler {
         }
     }
 
+    public boolean writeString(String str) {
+        if (isFileWriterOpened() == false)
+            return false;
+
+        try {
+            fileWriter.write(str);
+            fileWriter.flush();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public Boolean isFileReaderOpened() {
         return fileReader==null ? false : true;
+    }
+
+    public Boolean isFileWriterOpened() {
+        return fileWriter==null ? false : true;
     }
 
 }
