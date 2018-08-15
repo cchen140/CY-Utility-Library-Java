@@ -1,4 +1,4 @@
-package me.cychen.util.gui;
+package cy.utility.gui;
 
 import javafx.scene.paint.Color;
 
