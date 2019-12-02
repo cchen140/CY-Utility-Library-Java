@@ -1,6 +1,7 @@
 package cy.utility;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -108,6 +109,20 @@ public class Sys {
         if(!folder.exists()){
             folder.mkdir();
         }
+    }
+
+    public static ArrayList<File> getFilesByExtensionInFolder(String inFolderPath, String extension) {
+        ArrayList<File> files = new ArrayList<>();
+        if (!isFolderExisted(inFolderPath))
+            return files;
+
+        File folder = new File(inFolderPath);
+        for (File file : folder.listFiles()) {
+            if (file.getName().endsWith(extension)) {
+                files.add(file);
+            }
+        }
+        return files;
     }
 
     public static String currentTimeString() {
