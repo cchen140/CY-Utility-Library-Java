@@ -2,6 +2,7 @@ package cy.utility;
 
 import java.util.ArrayList;
 import java.util.Random;
+import org.apache.commons.math3.distribution.PoissonDistribution;
 
 /**
  * Created by cy on 3/14/2017.
@@ -38,6 +39,21 @@ public class Umath {
         return factors;
     }
 
+    public static ArrayList<Long> getDivisors(long n) {
+        ArrayList<Long> out = new ArrayList<>();
+        out.add((long)1);
+        for ( long i=2; i <= (n / 2); i++) {
+            if (n%i != 0)
+                continue;
+            out.add(i);
+        }
+
+        if (n != 1)
+            out.add(n);
+
+        return out;
+    }
+
     public static double getGeometricMean(ArrayList<Double> values) {
         double multiple = 1;
         for (double val : values) {
@@ -56,15 +72,7 @@ public class Umath {
     }
 
     public static int getPoisson(double lambda) {
-        double L = Math.exp(-lambda);
-        double p = 1.0;
-        int k = 0;
-
-        do {
-            k++;
-            p *= Math.random();
-        } while (p > L);
-
-        return k - 1;
+        PoissonDistribution pd = new PoissonDistribution(lambda);
+        return pd.sample();
     }
 }
