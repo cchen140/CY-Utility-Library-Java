@@ -1,6 +1,8 @@
 package cy.utility;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import org.apache.commons.math3.distribution.PoissonDistribution;
 
@@ -59,7 +61,39 @@ public class Umath {
         for (double val : values) {
             multiple *= val;
         }
-        return Math.pow(multiple, (double)(1/values.size()));
+        return Math.pow(multiple, (double)(1.0/values.size()));
+    }
+
+    public static double getMean(ArrayList<Double> values) {
+        return getSum(values)/values.size();
+    }
+
+    public static double getSum(ArrayList<Double> values) {
+        double sum = 0;
+        for (double v : values) {
+            sum += v;
+        }
+        return sum;
+    }
+
+    public static double getSampleVariance(ArrayList<Double> values) {
+
+        double mean = getMean(values);
+        double sum = 0.0;
+        for (double v : values) {
+            sum += Math.pow(v-mean,2);
+        }
+        return sum/(values.size()-1);
+    }
+
+    public static ArrayList<Double> getMinMaxNormalizedList(List<Double> data) {
+        ArrayList<Double> normalizedData = new ArrayList<>();
+        double min = Collections.min(data);
+        double divisor = Collections.max(data) - min;
+        for (Double value : data) {
+            normalizedData.add((value-min)/divisor);
+        }
+        return normalizedData;
     }
 
     public static long gcd(long a, long b) {
